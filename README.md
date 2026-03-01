@@ -28,6 +28,8 @@ Other recommendations are welcome.
    - Type of data (categorical, continuous, etc.)
    - Etc.
 
+The data extractions will be as automated as possible with existing or custom functions.
+
 ## Creating Training/Testing Data
 - Train models using each of the different algorithms on each dataset
 - Report relevant metrics:
@@ -58,8 +60,18 @@ My initial thought is to split each algorithm across each one of us:
    - The approach to train the model should follow our standards from class
 
 For the final model:
- - I am under the assumption we should use ANN
+ - I am under the assumption that we should use ANN
  - We can approach this collaboratively
+   - I would like to have a user interface to enter data characteristics
+   - If possible, we could automate the feature extraction from the dataset a user provides, rather than request them to identify the features
+   - We will need a model to be trained, of course, and may require more data
+- These lead to a few roles:
+  - Design the UI
+    - Validate data available
+  - Train the model
+    - Validate UI
+  - Collect additional data
+    - Validate model training  
 
 # Collaboration
  - I appreciate code review. If you have any input on the programs I write, let me know. I will plan to do the same.
@@ -67,10 +79,12 @@ For the final model:
  - Tasks and milestones will be tracked in the project associated with this repository. We will be assigned to our responsibilities, and each should be given an expected end date and associated with a milestone.
  - There is a discussion tab (after I add collaborators) where we can put ideas and thoughts related to the project.
  - If you find something is broken, raise an issue.
+ - We will use Python mainly
 
 # Where to train models
 - What are your set-ups like? Where do you plan to train models?
   - I am considering Google Colab, as students, we get a free subscription and can get access to better resources
  
+
 
 
