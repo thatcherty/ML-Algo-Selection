@@ -2,9 +2,11 @@
 Classify datasets by the recommended machine learning algorithm for model training. Provide results that discuss several important metrics and the expected performance of the selected model.
 
 # Intro
+ - Short introductions
  - What interested you about this project?
  - Is there anything specific you hope to get out of it?
  - General availability, spring break availability?
+ - What kind of experience do you have with Machine Learning?
 
 # Datasets
 Data sets will be selected from the [UCI Machine Learning Repo](https://archive.ics.uci.edu/datasets)
@@ -59,10 +61,14 @@ For the final model:
  - We can approach this collaboratively
 
 # Collaboration
- - I appreciate code review, if you have any input on the programs I write, let me know
- - I will plan to do the same
+ - I appreciate code review. If you have any input on the programs I write, let me know. I will plan to do the same.
+ - I would like to work within GitHub mainly. How comfortable are you with this?
+ - Tasks and milestones will be tracked in the project associated with this repository. We will be assigned to our responsibilities, and each should be given an expected end date and associated with a milestone.
+ - There is a discussion tab (after I add collaborators) where we can put ideas and thoughts related to the project.
+ - If you find something is broken, raise an issue.
 
 # Where to train models
 - What are your set-ups like? Where do you plan to train models?
   - I am considering Google Colab, as students, we get a free subscription and can get access to better resources
  
+
