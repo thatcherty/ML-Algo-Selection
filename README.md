@@ -5,8 +5,9 @@ Classify datasets by the recommended machine learning algorithm for model traini
  - Short introductions
  - What interested you about this project?
  - Is there anything specific you hope to get out of it?
- - General availability, spring break availability?
  - What kind of experience do you have with Machine Learning?
+ - General availability, spring break availability?
+
 
 # Datasets
 Data sets will be selected from the [UCI Machine Learning Repo](https://archive.ics.uci.edu/datasets)
@@ -71,4 +72,5 @@ For the final model:
 - What are your set-ups like? Where do you plan to train models?
   - I am considering Google Colab, as students, we get a free subscription and can get access to better resources
  
+
 
