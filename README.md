@@ -15,12 +15,17 @@ Data sets will be selected from the [UCI Machine Learning Repo](https://archive.
 # Approach
 2 possible paths:
  - Select 3 different machine learning algorithms to classify datasets into
+   - Linear Regression
+   - Logistic Regression
+   - A third option (possibly ANN, this may be too complex in setup)
  - Dive into ANN and change the classification to the recommended layers and nodes to use for training
 
 Other recommendations are welcome.
 
 ## Selecting Data
  - Choose several datasets, the more the better
+   - Ideally, selecting benchmark datasets
+   - at least 10 to start
  - Extract the relevant features:
    - Size
    - Distribution (left-skewed, normal, right-skewed)
@@ -46,7 +51,7 @@ The data extractions will be as automated as possible with existing or custom fu
  - It should output the recommended model, along with the expected metrics that can be achieved with that model
 
 # Work split
-My initial thought is to split each algorithm across each one of us:
+## Data Collection
  - We will all use the same datasets
  - We will use the same functions to do the following:
    - Extract the features (Size of dataset, distribution, feature count)
@@ -59,7 +64,7 @@ My initial thought is to split each algorithm across each one of us:
  - We will each be responsible for developing the program that trains the model on the datasets for our specific algorithm
    - The approach to train the model should follow our standards from class
 
-For the final model:
+## Final Model Development
  - I am under the assumption that we should use ANN
  - We can approach this collaboratively
    - I would like to have a user interface to enter data characteristics
@@ -73,18 +78,31 @@ For the final model:
   - Collect additional data
     - Validate model training  
 
+## Presentation
+ - We can likely create slides about each of our model training experiences
+ - We can collaborate on presenting the final results
+
 # Collaboration
  - I appreciate code review. If you have any input on the programs I write, let me know. I will plan to do the same.
  - I would like to work within GitHub mainly. How comfortable are you with this?
  - Tasks and milestones will be tracked in the project associated with this repository. We will be assigned to our responsibilities, and each should be given an expected end date and associated with a milestone.
  - There is a discussion tab (after I add collaborators) where we can put ideas and thoughts related to the project.
  - If you find something is broken, raise an issue.
- - We will use Python mainly
+ - We will use Python mainly, but the UI can be in any language that can integrate with the model we develop
 
 # Where to train models
 - What are your set-ups like? Where do you plan to train models?
   - I am considering Google Colab, as students, we get a free subscription and can get access to better resources
  
+# Timeline
+ - More granualar tasks are still in the works
+ - High-level deadline on 4/29/2026 (project presentation)
+   - 2 months to complete
+   - Data collection completed by the end of March
+   - Final model training by the 3rd week of April
+   - Presentation and final reviews by 4/28/2026
+ 
+
 
 
 
