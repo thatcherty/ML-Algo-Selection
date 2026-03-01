@@ -93,6 +93,7 @@ The data extractions will be as automated as possible with existing or custom fu
 # Where to train models
 - What are your set-ups like? Where do you plan to train models?
   - I am considering Google Colab, as students, we get a free subscription and can get access to better resources
+  - GitHub also allows Codespaces for free for Pro members, which is provided to you as a student. You can install a Colab extension and work on all your training in VS Code with Jupyter notebooks, running your training on the Google Colab GPU
  
 # Timeline
  - More granualar tasks are still in the works
@@ -102,6 +103,7 @@ The data extractions will be as automated as possible with existing or custom fu
    - Final model training by the 3rd week of April
    - Presentation and final reviews by 4/28/2026
  
+
 
 
 
