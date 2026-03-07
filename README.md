@@ -1,6 +1,8 @@
 # Overview
 Classify datasets by the recommended machine learning algorithm for model training. Provide results that discuss several important metrics and the expected performance of the selected model.
 
+We will limit the datasets selected to classification datasets. Since the task for the data is known before the model is considered, it is trivial to predict it.
+
 # Intro
  - Short introductions
  - What interested you about this project?
@@ -8,14 +10,16 @@ Classify datasets by the recommended machine learning algorithm for model traini
  - What kind of experience do you have with Machine Learning?
  - General availability, spring break availability?
 
-
 # Datasets
 Data sets will be selected from the [UCI Machine Learning Repo](https://archive.ics.uci.edu/datasets)
+
+We should limit the task type to Classification.
 
 # Approach
 2 possible paths:
  - Select 3 different machine learning algorithms to classify datasets into
-   - Linear Regression
+   - ~~Linear Regression~~
+   - Decision tree
    - Logistic Regression
    - A third option (possibly ANN, this may be too complex in setup)
  - Dive into ANN and change the classification to the recommended layers and nodes to use for training
@@ -103,6 +107,7 @@ The data extractions will be as automated as possible with existing or custom fu
    - Final model training by the 3rd week of April
    - Presentation and final reviews by 4/28/2026
  
+
 
 
 
