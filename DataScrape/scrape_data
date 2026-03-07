@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Scrape dataset names + links from a UCI ML Repository listing page and save to Excel.
 
-Made by AI
+with the help of AI
 
 Default target:
 https://archive.ics.uci.edu/datasets?Task=Classification&Python=true&skip=0&take=10&sort=desc&orderBy=NumHits&search=
@@ -14,6 +14,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+from pyexpat import features
 import re
 from collections import OrderedDict
 from datetime import datetime, timezone
@@ -50,12 +51,47 @@ def extract_total_count(page_text: str) -> int | None:
     match = re.search(r"\b\d+\s+to\s+\d+\s+of\s+(\d+)\b", page_text)
     return int(match.group(1)) if match else None
 
+# The will retrieve the count of records in each dataset and requires navigating to each dataset page
+# My contribution
+def extract_dataset_features(page_url: str) -> dict[str,str]:
+    html = requests.get(page_url).text
+
+    soup = BeautifulSoup(html, "html.parser")
+
+    features: dict[str,str] = {}
+
+    # find all dataset characteristic blocks
+    blocks = soup.select("div.col-span-4")
+
+    for block in blocks:
+        h1 = block.find("h1")
+        p = block.find("p")
+
+        if not h1 or not p:
+            continue
+        if "Instances" in h1.get_text():
+             features["Instances"] = p.get_text(strip=True)
+        if "Features" in h1.get_text():
+             features["Features"] = p.get_text(strip=True)
+
+    sections = soup.select("div.flex-col")
+    for section in sections:
+        p = section.find("p")
+
+        if not p:
+            continue
+        if "Missing" in p.get_text():
+            text = p.find_next_sibling("div").find("p").get_text(strip=True)
+            if text:
+                features["Missing Values"] = text
+                break
+    return features
 
 def normalize_name(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-def parse_dataset_links(html: str, page_url: str) -> list[dict[str, str]]:
+def parse_dataset_links(html: str, page_url: str) -> list[dict[str, dict[str, str]]]:
     soup = BeautifulSoup(html, "html.parser")
 
     # Prefer title links that appear inside headings on the current UCI site.
@@ -65,7 +101,7 @@ def parse_dataset_links(html: str, page_url: str) -> list[dict[str, str]]:
     if not anchors:
         anchors = soup.select("a[href*='/dataset/'], a[href*='/ml/datasets/']")
 
-    rows: list[dict[str, str]] = []
+    rows: list[dict[str, dict[str, str]]] = []
     seen: set[tuple[str, str]] = set()
 
     for a in anchors:
@@ -84,7 +120,9 @@ def parse_dataset_links(html: str, page_url: str) -> list[dict[str, str]]:
         if key in seen:
             continue
         seen.add(key)
-        rows.append({"dataset_name": name, "dataset_url": full_url})
+        dataset_features = extract_dataset_features(full_url)
+        dataset_features["URL"] = full_url
+        rows.append({"dataset_name": name, "dataset_features": dataset_features})
 
     return rows
 
@@ -109,13 +147,13 @@ def scrape_all_datasets(base_url: str, *, take: int = 25, timeout: int = 30) -> 
             total_count = extract_total_count(text)
 
         page_rows = parse_dataset_links(html, page_url)
-        page_new_rows = [row for row in page_rows if row["dataset_url"] not in seen_urls]
+        page_new_rows = [row for row in page_rows if row["dataset_features"]["URL"] not in seen_urls]
 
         if not page_new_rows:
             break
 
         for row in page_new_rows:
-            seen_urls.add(row["dataset_url"])
+            seen_urls.add(row["dataset_features"]["URL"])
             all_rows.append(row)
 
         if total_count is not None and len(all_rows) >= total_count:
@@ -134,7 +172,7 @@ def autosize_columns(ws) -> None:
         ws.column_dimensions[col_letter].width = width
 
 
-def write_excel(rows: Iterable[dict[str, str]], output_path: Path, source_url: str) -> None:
+def write_excel(rows: Iterable[dict[str, dict[str, str]]], output_path: Path, source_url: str) -> None:
     rows = list(rows)
     wb = Workbook()
     ws = wb.active
@@ -142,6 +180,10 @@ def write_excel(rows: Iterable[dict[str, str]], output_path: Path, source_url: s
 
     ws["A1"] = "Dataset Name"
     ws["B1"] = "Dataset Link"
+    ws["C1"] = "Instances"
+    ws["D1"] = "Features"
+    ws["E1"] = "Missing Values"
+
 
     header_fill = PatternFill("solid", fgColor="1F4E78")
     header_font = Font(color="FFFFFF", bold=True)
@@ -153,14 +195,20 @@ def write_excel(rows: Iterable[dict[str, str]], output_path: Path, source_url: s
 
     for idx, row in enumerate(rows, start=2):
         name_cell = ws.cell(row=idx, column=1, value=row["dataset_name"])
-        link_cell = ws.cell(row=idx, column=2, value=row["dataset_url"])
+        link_cell = ws.cell(row=idx, column=2, value=row["dataset_features"]["URL"])
+        instances_cell = ws.cell(row=idx, column=3, value=row["dataset_features"].get("Instances", ""))
+        features_cell = ws.cell(row=idx, column=4, value=row["dataset_features"].get("Features", ""))
+        missing_cell = ws.cell(row=idx, column=5, value=row["dataset_features"].get("Missing Values", ""))  
 
-        name_cell.hyperlink = row["dataset_url"]
-        link_cell.hyperlink = row["dataset_url"]
+        name_cell.hyperlink = row["dataset_features"]["URL"]
+        link_cell.hyperlink = row["dataset_features"]["URL"]
         name_cell.style = "Hyperlink"
         link_cell.style = "Hyperlink"
         name_cell.alignment = Alignment(vertical="center")
         link_cell.alignment = Alignment(vertical="center")
+        instances_cell.alignment = Alignment(vertical="center")
+        features_cell.alignment = Alignment(vertical="center")
+        missing_cell.alignment = Alignment(vertical="center")
 
     ws.freeze_panes = "A2"
     ws.auto_filter.ref = f"A1:B{max(2, len(rows) + 1)}"
