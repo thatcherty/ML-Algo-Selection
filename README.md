@@ -13,7 +13,7 @@ We will limit the datasets selected to classification datasets. Since the task f
 # Datasets
 Data sets will be selected from the [UCI Machine Learning Repo](https://archive.ics.uci.edu/datasets)
 
-Documentation about how to [import into Python]{https://github.com/uci-ml-repo/ucimlrepo)
+Documentation about how to [import into Python](https://github.com/uci-ml-repo/ucimlrepo)
 
 We should limit the task type to Classification.
 
@@ -109,6 +109,7 @@ The data extractions will be as automated as possible with existing or custom fu
    - Final model training by the 3rd week of April
    - Presentation and final reviews by 4/28/2026
  
+
 
 
 
