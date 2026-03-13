@@ -17,6 +17,8 @@ Documentation about how to [import into Python](https://github.com/uci-ml-repo/u
 
 We should limit the task type to Classification.
 
+If we need additional data (or have time for additional data), we can import more from [OpenML](https://www.openml.org/search?type=data&status=active)
+
 # Approach
 2 possible paths:
  - Select 3 different machine learning algorithms to classify datasets into
@@ -109,6 +111,7 @@ The data extractions will be as automated as possible with existing or custom fu
    - Final model training by the 3rd week of April
    - Presentation and final reviews by 4/28/2026
  
+
 
 
 
